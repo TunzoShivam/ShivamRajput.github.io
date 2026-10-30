@@ -1,269 +1,249 @@
-// 1. DYNAMIC FLASHLIGHT BEAM CURSOR
-const beam = document.getElementById('cursor-beam');
-
-// Only enable flashlight if device has a fine pointer (mouse)
-if (window.matchMedia("(pointer: fine)").matches) {
-    document.addEventListener('mousemove', (e) => {
-        beam.style.left = e.clientX + 'px';
-        beam.style.top = e.clientY + 'px';
-    });
-} else {
-    // Hide beam on touch devices to improve performance
-    beam.style.display = 'none';
+/* ===== Base ===== */
+:root {
+    --link: #1a5c9e;
+    --link-hover: #0b3d73;
+    --heading: #1a5c9e;
+    --text: #222;
+    --muted: #666;
+    --border: #e3e3e3;
+    --notice-bg: #eef1f4;
+    --nav-h: 64px;
 }
 
-// 2. THEME TOGGLE ENGINE
-const toggleBtn = document.getElementById('theme-toggle');
-const icon = toggleBtn.querySelector('i');
-const html = document.documentElement;
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-// Check Local Storage
-if(localStorage.getItem('theme') === 'light') {
-    html.setAttribute('data-theme', 'light');
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body {
+    background: #fff;
+    color: var(--text);
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 18px;
+    line-height: 1.5;
 }
 
-toggleBtn.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    
-    if(currentTheme === 'light') {
-        html.setAttribute('data-theme', 'dark');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-        updateParticleColor('dark');
-    } else {
-        html.setAttribute('data-theme', 'light');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-        updateParticleColor('light');
+a { color: var(--link); text-decoration: underline; }
+a:hover { color: var(--link-hover); }
+
+/* ===== Top navbar ===== */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-inner {
+    max-width: 1100px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+}
+
+.nav-link {
+    color: #222;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 6px 0;
+}
+
+.nav-link:hover { color: var(--link); }
+.nav-link.active { font-weight: 700; color: #000; }
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #222;
+}
+
+/* ===== Page layout ===== */
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 40px) 20px 40px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 12px;
+    align-items: start;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5px;
+}
+
+.avatar {
+    width: 148px;
+    height: 180px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    border: 1px solid var(--border);
+    padding: 4px;
+    border-radius: 4px;
+    background: #fff;
+    margin: 0 0 14px 10px;
+}
+
+.name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.25;
+    margin-left: 10px;
+}
+
+.role {
+    margin: 10px 0 12px 10px;
+    color: #111;
+}
+
+.side-links { list-style: none; }
+
+.side-links li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 6px 10px;
+    color: #111;
+}
+
+.side-links i { width: 16px; text-align: center; margin-top: 2px; }
+.side-links a { color: #111; text-decoration: none; display: flex; gap: 8px; }
+.side-links a:hover { color: var(--link); }
+
+/* ===== Content ===== */
+.content { min-width: 0; }
+
+.content p { text-align: justify; margin-bottom: 16px; }
+
+section { padding-bottom: 28px; }
+
+.section-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--heading);
+    padding-bottom: 8px;
+    margin: 20px 0 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+#home > p:first-child { margin-top: 0; }
+
+.notice {
+    background: var(--notice-bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+.content ul { padding-left: 40px; margin-bottom: 16px; }
+.content li { margin-bottom: 8px; text-align: justify; }
+
+.plain-list { list-style: disc; }
+#contact .plain-list { list-style: none; padding-left: 0; }
+#contact .plain-list i { color: var(--heading); width: 20px; }
+
+/* Entries (education, experience, projects) */
+.entry { margin-bottom: 26px; }
+
+.entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+}
+
+.entry-head h3 { font-size: 20px; color: #111; }
+
+.date { color: var(--muted); font-size: 16px; font-style: italic; }
+
+.entry-org { color: var(--heading); font-weight: 600; margin: 2px 0 8px; }
+
+.sub-head { font-weight: 700; margin-bottom: 6px !important; }
+
+.badge {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: var(--heading);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+.tags { color: var(--muted); font-style: italic; font-size: 16px; }
+
+/* Footer */
+.footer {
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 860px) {
+    body { font-size: 17px; }
+
+    .nav-inner { justify-content: flex-end; padding: 0 16px; }
+    .nav-toggle { display: block; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 20px;
     }
-});
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .nav-links li:last-child { border-bottom: none; }
 
-// 3. NEURAL NETWORK CANVAS ANIMATION (ADAPTIVE COLOR)
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let width, height;
-let particles = [];
-let particleColor = 'rgba(0, 243, 255, '; // Default Dark Mode Color
+    .page { grid-template-columns: 1fr; gap: 24px; padding-top: calc(var(--nav-h) + 24px); }
 
-function resizeCanvas() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    .sidebar { position: static; display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: flex-start; }
+    .sidebar .avatar { margin-left: 0; }
+    .sidebar .name, .sidebar .role { margin-left: 0; }
+    .side-links { flex-basis: 100%; }
+    .side-links li { padding-left: 0; }
+
+    .content ul { padding-left: 24px; }
 }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function updateParticleColor(theme) {
-    if(theme === 'light') {
-        particleColor = 'rgba(0, 119, 182, '; // Blue for Light Mode
-    } else {
-        particleColor = 'rgba(0, 243, 255, '; // Cyan for Dark Mode
-    }
-    particles = []; // Reset particles to apply new color
-    initParticles();
-}
-
-// Initialize based on current theme
-if(localStorage.getItem('theme') === 'light') {
-    updateParticleColor('light');
-}
-
-class Particle {
-    constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
-    }
-
-    update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-    }
-
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = particleColor + '0.5)';
-        ctx.fill();
-    }
-}
-
-function initParticles() {
-    // Reduce particle count on mobile for performance
-    const count = window.innerWidth < 768 ? 30 : 60;
-    for (let i = 0; i < count; i++) particles.push(new Particle());
-}
-initParticles();
-
-function animateCanvas() {
-    ctx.clearRect(0, 0, width, height);
-    
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-
-        for (let j = i; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // Adjust connection distance based on screen size
-            const maxDist = window.innerWidth < 768 ? 100 : 150;
-
-            if (distance < maxDist) {
-                ctx.beginPath();
-                ctx.strokeStyle = particleColor + (1 - distance / maxDist) + ')';
-                ctx.lineWidth = 0.5;
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-            }
-        }
-    }
-    requestAnimationFrame(animateCanvas);
-}
-animateCanvas();
-
-// 4. TYPEWRITER EFFECT
-const words = ["Computer Engineer", "M.Tech Scholar", "TunzoTech Founder", "Researcher"];
-let i = 0;
-let timer;
-
-function typeWriter() {
-    const heading = document.getElementById("typewriter");
-    if (!heading) return;
-    
-    let word = words[i];
-    let currentText = heading.innerText;
-    
-    if (currentText.length < word.length) {
-        heading.innerText = word.substring(0, currentText.length + 1);
-        timer = setTimeout(typeWriter, 100);
-    } else {
-        setTimeout(deleteText, 2000);
-    }
-}
-
-function deleteText() {
-    const heading = document.getElementById("typewriter");
-    if (!heading) return;
-
-    let currentText = heading.innerText;
-
-    if (currentText.length > 0) {
-        heading.innerText = currentText.substring(0, currentText.length - 1);
-        timer = setTimeout(deleteText, 50);
-    } else {
-        i = (i + 1) % words.length;
-        typeWriter();
-    }
-}
-typeWriter();
-
-// 5. 3D TILT EFFECT
-const card = document.getElementById('tilt-card');
-const container = document.querySelector('.hero-image-wrapper');
-
-if (container && card) {
-    container.addEventListener('mousemove', (e) => {
-        if(window.innerWidth > 992) {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        }
-    });
-
-    container.addEventListener('mouseleave', () => {
-        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-    });
-}
-
-// 6. SCROLL ANIMATIONS
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-            entry.target.style.opacity = 1;
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-    el.style.opacity = 0;
-    observer.observe(el);
-});
-
-// 7. ANIMATED NUMBER COUNTERS
-const stats = document.querySelectorAll('.stat-number');
-let hasAnimatedStats = false;
-
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimatedStats) {
-            hasAnimatedStats = true;
-            stats.forEach(stat => {
-                const target = +stat.getAttribute('data-target');
-                const isFloat = target % 1 !== 0;
-                const increment = target / 50;
-                let current = 0;
-                const updateCount = () => {
-                    current += increment;
-                    if (current < target) {
-                        stat.innerText = isFloat ? current.toFixed(1) : Math.ceil(current);
-                        setTimeout(updateCount, 30);
-                    } else {
-                        stat.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-        }
-    });
-});
-
-const statsSection = document.querySelector('.stats-grid');
-if(statsSection) statsObserver.observe(statsSection);
-
-// 8. VISITOR COUNTER
-const counterVal = document.getElementById('counter-val');
-const API_URL = 'https://api.counterapi.dev/v1/tunzoshivam/portfolio-main/up';
-
-if (counterVal) {
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            counterVal.innerText = data.count || "ERROR";
-        })
-        .catch(err => {
-            counterVal.innerText = "OFFLINE";
-        });
-}
-
-// 9. ACTIVE NAVIGATION LINK
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (scrollY >= (sectionTop - 300)) {
-            current = section.getAttribute('id');
-        }
-    });
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-            link.classList.add('active');
-        }
-    });
-});
