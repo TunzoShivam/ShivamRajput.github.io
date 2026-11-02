@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Shivam Rajput">
+    <title>Research | Shivam Rajput</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <nav class="nav-inner">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="research.html" class="nav-link">Research</a></li>
+                <li><a href="education.html" class="nav-link">Education</a></li>
+                <li><a href="experience.html" class="nav-link">Experience</a></li>
+                <li><a href="news.html" class="nav-link">News</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page">
+
+        <aside class="sidebar">
+            <img class="avatar" src="Screenshot_2026-01-31-21-45-39-92_92460851df6f172a4592fca41cc2d2e6.jpg" alt="Shivam Rajput">
+            <h2 class="name">Shivam Rajput</h2>
+            <p class="role">M.Tech (R) + Ph.D. Dual Degree Scholar, IIT Mandi</p>
+            <ul class="side-links">
+                <li><i class="fas fa-location-dot"></i> School of Computing and Electrical Engineering, IIT Mandi</li>
+                <li><a href="mailto:shivamrajputmjo@gmail.com"><i class="fas fa-envelope"></i> Email</a></li>
+                <li><a href="https://www.linkedin.com/in/shivam-rajput-b18097237" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                <li><a href="https://github.com/tunzoshivam" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="https://www.instagram.com/tunzotech/" target="_blank"><i class="fab fa-instagram"></i> TunzoTech</a></li>
+                <li><i class="fas fa-phone"></i> +91-6396589362</li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <section>
+                <h2 class="section-title first">Research</h2>
+                <p>
+                    My research is in intelligent reflecting surface (IRS/RIS) assisted wireless communication,
+                    carried out at IIT Mandi under <strong>Dr. Pavan Kumar Reddy Manne</strong> as part of my
+                    M.Tech (Research) + Ph.D. dual degree. Research interests: near-field beamfocusing, NOMA,
+                    hardware impairments in reconfigurable surfaces, and intelligent communication systems.
+                </p>
+
+                <div class="entry">
+                    <div class="entry-head">
+                        <h3>IRS-Assisted Near-Field NOMA with Imperfect Phase Compensation <span class="badge">Ongoing</span></h3>
+                    </div>
+                    <div class="entry-org">M.Tech (Research) + Ph.D. work, IIT Mandi</div>
+                    <p>
+                        Large IRS panels at 30 GHz (for example 10,000 cells on a 0.5 m aperture) place nearby
+                        users in the radiative near field, where the panel can <em>focus</em> energy on a point
+                        instead of only steering it in a direction. This work asks when two users at the same
+                        angle but different distances can be served together with NOMA rather than OMA, while
+                        accounting for the phase error of low-cost phase shifters.
+                    </p>
+                    <p class="sub-head">Key contributions</p>
+                    <ul>
+                        <li><strong>Near-field model:</strong> a second-order (Fresnel) expansion of the element-to-user distance gives the beamfocusing vector, and the channel correlation µ between the two users is derived in terms of Fresnel integrals. It depends on |1/r₁ − 1/r₂|, so depth separation works well near the panel and degrades with range.</li>
+                        <li><strong>Imperfect phase compensation:</strong> with phase error uniform in [−δ, δ], the received power is reduced by sinc²(δ). This hardware penalty multiplies the geometric penalty µ² for the weak user.</li>
+                        <li><strong>Feasibility conditions:</strong> a closed-form bound on the phase error for NOMA to be possible, a lower bound on µ, and an equivalent test purely in terms of user distances: Δd ≤ A·r₁² / (1 − A·r₁), with no limit on Δd once r₁ ≥ 1/A.</li>
+                        <li><strong>Power allocation:</strong> lower and upper bounds on the strong user's power share, with the maximum sum-rate allocation at the upper bound and a closed-form fair allocation.</li>
+                        <li><strong>Decision rule:</strong> targets are set to the OMA rates, so no user is ever worse off than under OMA. The costly Fresnel inversion is done once per angular sector, and each candidate pair needs only a simple comparison.</li>
+                    </ul>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-head">
+                        <h3>Design and Development of a RIS-Assisted Wireless System</h3>
+                    </div>
+                    <div class="entry-org">Project work, IIT Mandi</div>
+                    <p>
+                        Hands-on design and development of a RIS-assisted wireless system, showcased at IMC 2026
+                        at Yashobhoomi, New Delhi. See the <a href="projects.html">Projects</a> and
+                        <a href="news.html">News</a> pages.
+                    </p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <span>Designed &amp; Built by Shivam Rajput © 2026</span>
+                <span>Visits: <strong id="counter-val">…</strong></span>
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
