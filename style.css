@@ -136,7 +136,9 @@ a:hover { color: var(--link-hover); }
 
 .content p { text-align: justify; margin-bottom: 16px; }
 
-section { padding-bottom: 28px; }
+section { padding-bottom: 28px; min-height: 55vh; }
+
+.section-title.first { margin-top: 0; }
 
 .section-title {
     font-family: Georgia, "Times New Roman", serif;
